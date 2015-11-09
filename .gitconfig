@@ -4,7 +4,7 @@
 [mergetool]
 	keepBackup = true
 [core]
-	editor = atom
+	editor = atom --wait
 	excludesfile = ~/.gitignore
 [credential]
 	helper = osxkeychain
