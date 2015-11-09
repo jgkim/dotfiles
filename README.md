@@ -1,6 +1,6 @@
-# Tipplr dotfiles
+# My dotfiles
 
-This is a repository for dotfiles used in Tipplr's development environment. There is an [Ansible](http://www.ansible.com/) playbook for setting up the development environment on **OS X**.
+This is a repository for my dotfiles used to setup a development environment. There is an [Ansible](http://www.ansible.com/) playbook for setting up the development environment on **OS X**.
 
 
 ## Things you should know
