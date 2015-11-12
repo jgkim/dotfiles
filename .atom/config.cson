@@ -20,7 +20,6 @@
     fileExtension: ".md"
   "markdown-preview":
     useGitHubStyle: true
-    liveUpdate: false
   marked: {}
   "file-icons":
     onChanges: true
