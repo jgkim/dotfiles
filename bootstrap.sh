@@ -26,8 +26,11 @@ function bootstrap() {
     echo "Updating OS X. If this requires a restart, run the script again."
     sudo softwareupdate -iva
 
-    echo "Installing Xcode Command Line Tools."
-    xcode-select --install
+    if ! xcode-select -p > /dev/null ; then
+      echo "Installing Xcode Command Line Tools."
+      xcode-select --install
+      while ! xcode-select -p > /dev/null ; do sleep 1; done
+    fi
   fi;
 
   # Check for Homebrew and install if we don't have it.
