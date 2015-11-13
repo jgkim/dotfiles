@@ -25,6 +25,10 @@ function bootstrap() {
 
   # Check for Homebrew and install if we don't have it.
   if [[ $(which brew) != ${BREW_DIR}* ]]; then
+    if [ -z $(which brew) ]; then
+      echo "Uninstalling the existing Homebrew."
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+    fi
     echo "Installing Homebrew."
     sudo mkdir -p ${BREW_DIR}
     sudo chown -R $(id -un) ${BREW_DIR}
@@ -39,6 +43,7 @@ function bootstrap() {
   ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
 
   echo "Configuring the playbook variables."
+  mkdir -p $(dirname ${LOCALHOST_VAR})
   cat <<EOF > ${LOCALHOST_VAR}
 ---
 brew_dir: "${BREW_DIR}"
@@ -57,6 +62,7 @@ EOF
   cd ${DOTFILES_HOME}/.ansible
   ansible-galaxy install -f -r requirements.yml
 
+  cd ${DOTFILES_LOCAL}
   echo 'Now you can run the playbook by executing the script: `./update.sh`'
 }
 
