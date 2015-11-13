@@ -1,5 +1,7 @@
 # My dotfiles
 
+[![Build Status](http://img.shields.io/travis/jgkim/dotfiles.svg?style=flat)](https://travis-ci.org/jgkim/dotfiles)
+
 This is a repository for my dotfiles used to setup a development environment. There is an [Ansible](http://www.ansible.com/) playbook for setting up the development environment on **OS X**.
 
 
