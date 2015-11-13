@@ -30,6 +30,7 @@ function bootstrap() {
       echo "Installing Xcode Command Line Tools."
       xcode-select --install
       while ! xcode-select -p > /dev/null ; do sleep 1; done
+      sudo xcodebuild -license
     fi
   fi;
 
