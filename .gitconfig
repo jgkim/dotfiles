@@ -1,5 +1,5 @@
 [user]
-	user = James G. Kim
+	name = James G. Kim
 	email = jgkim@jayg.org
 [mergetool]
 	keepBackup = true
