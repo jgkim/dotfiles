@@ -15,7 +15,7 @@ function bootstrap() {
   sudo -v
 
   # Keep-alive: update existing `sudo` time stamp until the script has finished.
-  while kill -0 "$$"; do sudo -n true; sleep 60; done 2>/dev/null &
+  while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
   echo "Updating OS X. If this requires a restart, run the script again."
   sudo softwareupdate -iva
@@ -27,7 +27,7 @@ function bootstrap() {
   if [[ $(which brew) != ${BREW_DIR}* ]]; then
     if [ -z $(which brew) ]; then
       echo "Uninstalling the existing Homebrew."
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+      sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
     fi
     echo "Installing Homebrew."
     sudo mkdir -p ${BREW_DIR}
