@@ -20,5 +20,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
 export WORKON_HOME="/usr/local/pythonenv"
 source `brew --prefix`/bin/virtualenvwrapper.sh
