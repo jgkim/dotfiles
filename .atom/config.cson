@@ -28,5 +28,7 @@
   "git-plus": {}
   "atom-alignment": {}
   minimap: {}
-  "exception-reporting":
-    userId: "36929b34-f75b-55cc-e9b5-0160178c6689"
+  linter:
+    errorPanelHeight: 22
+  "linter-eslint":
+    globalNodePath: "/opt/homebrew"
