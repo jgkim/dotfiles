@@ -9,6 +9,7 @@ marked
 minimap
 monokai
 set-syntax
+merge-conflicts
 linter
 linter-eslint
 language-babel
