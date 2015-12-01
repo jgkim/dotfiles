@@ -17,3 +17,5 @@ es6-javascript
 gulp-control
 toggle-quotes
 node-debugger
+language-restructuredtext
+rst-preview-pandoc

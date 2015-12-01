@@ -1,6 +1,7 @@
 export PATH="/opt/homebrew/bin:/opt/homebrew-cask/bin:$PATH"
 export MANPATH="/opt/homebrew/share/man:$MANPATH"
 export EDITOR="atom"
+export NVM_DIR=~/.nvm
 
 if [ -f ~/.bashrc ]; then
   source ~/.bashrc
@@ -24,3 +25,4 @@ fi
 
 export WORKON_HOME="/usr/local/pythonenv"
 source `brew --prefix`/bin/virtualenvwrapper.sh
+source `brew --prefix nvm`/nvm.sh
