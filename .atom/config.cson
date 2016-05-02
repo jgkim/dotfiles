@@ -1,4 +1,7 @@
 "*":
+  "activate-power-mode":
+    screenShake:
+      enabled: false
   "aligner-css": {}
   "aligner-scss": {}
   "autocomplete-plus": {}
