@@ -21,7 +21,7 @@ script:
   - sudo -s ./bootstrap.sh '--force --no-update'
   # Generate package lists for testing
   - echo 'minimap' > atom_packages
-  - echo 'bash-completion' > brew_packages
+  - echo 'node' > brew_packages
   - echo 'dterm' > cask_packages
   - echo 'atom' >> cask_packages
   - echo 'heroku-pipelines' > heroku_plugins
@@ -29,7 +29,7 @@ script:
   - echo 'npm-check-updates' > node_packages
   # Execute the update script
   - export PATH=/opt/homebrew/bin:$PATH
-  - sudo -s FORCE_UNSAFE_CONFIGURE=1 ./update.sh '-e "brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false"'
+  - travis_wait 50 sudo -s FORCE_UNSAFE_CONFIGURE=1 ./update.sh '-e "brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false"'
 
 notifications:
   slack:
