@@ -1,3 +1,4 @@
+sublime-style-column-selection
 aligner
 aligner-css
 aligner-scss
@@ -22,7 +23,7 @@ node-debugger
 rst-preview-pandoc
 set-syntax
 sort-lines
-sublime-style-column-selection
 toggle-quotes
 motepair
+language-cypher
 activate-power-mode
