@@ -2,3 +2,4 @@ gulp
 datapackage
 npm-check-updates
 nodemon
+react-native-cli
