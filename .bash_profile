@@ -26,3 +26,4 @@ fi
 export WORKON_HOME="/usr/local/pythonenv"
 source `brew --prefix`/bin/virtualenvwrapper.sh
 source `brew --prefix nvm`/nvm.sh
+eval "$(gulp --completion=bash)"
