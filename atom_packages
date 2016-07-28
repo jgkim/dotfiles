@@ -26,4 +26,6 @@ sort-lines
 toggle-quotes
 motepair
 language-cypher
-activate-power-mode
+highlight-selected
+atom-react-native-autocomplete
+atom-react-native-css
