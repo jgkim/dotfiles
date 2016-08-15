@@ -4,6 +4,8 @@
       enabled: false
   "aligner-css": {}
   "aligner-scss": {}
+  "autocomplete-modules":
+    babelPluginModuleAlias: true
   "autocomplete-plus": {}
   core:
     packagesWithKeymapsDisabled: [
