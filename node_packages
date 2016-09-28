@@ -4,3 +4,4 @@ npm-check-updates
 nodemon
 react-native-cli
 rnpm
+ios-deploy
