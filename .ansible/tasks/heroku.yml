@@ -7,13 +7,13 @@
 - name: Find the installed Heroku Toolbelt plugins.
   shell: heroku plugins | sed -n 's/^\(.*\)@.*$/\1/p'
   register: existing_heroku_plugins
-  always_run: yes
+  check_mode: no
   changed_when: False
 
 - name: Get list of configured Heroku Toolbelt plugins.
   command: cat {{ dotfiles_local }}/heroku_plugins
   register: heroku_plugins
-  always_run: yes
+  check_mode: no
   changed_when: False
 
 - name: Ensure configured Heroku Toolbelt plugins are installed.

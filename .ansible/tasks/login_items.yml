@@ -2,14 +2,14 @@
 - name: Find the current login items.
   shell: osascript -e 'tell application "System Events" to get the name of every login item' | sed $'s/, /\\\n/g'
   register: existing_login_items
-  always_run: yes
+  check_mode: no
   failed_when: False
   changed_when: False
 
 - name: Get list of configured login items.
   command: cat {{ dotfiles_local }}/login_items
   register: login_items
-  always_run: yes
+  check_mode: no
   changed_when: False
 
 - name: Ensure configured login items are added.
