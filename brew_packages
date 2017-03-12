@@ -10,6 +10,7 @@ git-lfs
 git-flow
 node
 nvm
+yarn
 ssh-copy-id
 watchman
 android-sdk
