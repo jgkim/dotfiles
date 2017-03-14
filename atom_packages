@@ -13,7 +13,11 @@ language-babel
 language-rdf
 language-restructuredtext
 linter
+linter-ui-default
+busy-signal
+intentions
 linter-eslint
+linter-flow
 markdown-writer
 marked
 merge-conflicts
