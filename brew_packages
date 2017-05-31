@@ -13,6 +13,5 @@ nvm
 yarn
 ssh-copy-id
 watchman
-android-sdk
 pandoc
 imagemagick
