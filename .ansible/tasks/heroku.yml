@@ -5,7 +5,7 @@
     state: present
 
 - name: Find the installed Heroku Toolbelt plugins.
-  shell: heroku plugins | sed -n 's/^\(.*\)@.*$/\1/p'
+  shell: heroku plugins | sed -n 's/^\(.*\)[[:space:]].*$/\1/p'
   register: existing_heroku_plugins
   check_mode: no
   changed_when: False
