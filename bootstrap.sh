@@ -51,7 +51,7 @@ function bootstrap() {
   fi
 
   echo "Installing Python and Ansible via Homebrew."
-  echo $PATH
+  brew update
   brew install python ansible
   rm -rf ${DOTFILES_HOME}/.ansible
   ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
