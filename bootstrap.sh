@@ -13,12 +13,14 @@ ARG1=$1
 ARG2=$2
 
 function bootstrap() {
-  # Ask for the administrator password upfront.
-  if [ "$(whoami)" != "root" ]; then
-    sudo -v
+  if [ "$ARG1" == '-f' -o "$ARG1" == '--force' -o "$ARG2" == '-f' -o "$ARG2" == '--force' ]; then
+    # Ask for the administrator password upfront.
+    if [ "$(whoami)" != "root" ]; then
+      sudo -v
 
-    # Keep-alive: update existing `sudo` time stamp until the script has finished.
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+      # Keep-alive: update existing `sudo` time stamp until the script has finished.
+      while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    fi
   fi
 
   if [ "$ARG1" != '--no-update' -a "$ARG2" != '--no-update' ]; then
@@ -51,7 +53,6 @@ function bootstrap() {
   fi
 
   echo "Installing Python and Ansible via Homebrew."
-  brew update
   brew install python ansible
   rm -rf ${DOTFILES_HOME}/.ansible
   ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
