@@ -16,7 +16,7 @@ install:
 script:
   # Execute the bootstrapping script
   - cd ~/Workspace/dotfiles
-  - sudo -s ./bootstrap.sh --force --no-update
+  - ./bootstrap.sh --force --no-update
   # Generate package lists for testing
   - echo 'minimap' > atom_packages
   - echo 'node' > brew_packages
@@ -27,7 +27,7 @@ script:
   - echo 'npm-check-updates' > node_packages
   # Execute the update script
   - export PATH=/opt/homebrew/bin:$PATH
-  - travis_wait 50 sudo -s FORCE_UNSAFE_CONFIGURE=1 ./update.sh -e "brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false"
+  - travis_wait 50 FORCE_UNSAFE_CONFIGURE=1 ./update.sh -e "brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false"
 
 notifications:
   slack:
