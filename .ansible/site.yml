@@ -6,9 +6,9 @@
     atom_upgrade_all: True
     node_upgrade_all: True
   pre_tasks:
-    - include: tasks/load_files.yml
-    - include: tasks/fonts.yml
-    - include: tasks/local.yml
+    - import_tasks: tasks/load_files.yml
+    - import_tasks: tasks/fonts.yml
+    - import_tasks: tasks/local.yml
   roles:
     - {
         role: jgkim.dotfiles ,
@@ -25,8 +25,8 @@
         atom_packages: "{{ atom_packages_file.stdout_lines }}"
       }
   post_tasks:
-    - include: tasks/login_items.yml
-    - include: tasks/node_packages.yml
-    - include: tasks/docker.yml
-    - include: tasks/heroku.yml
-    - include: tasks/travis.yml
+    - import_tasks: tasks/login_items.yml
+    - import_tasks: tasks/node_packages.yml
+    - import_tasks: tasks/docker.yml
+    - import_tasks: tasks/heroku.yml
+    - import_tasks: tasks/travis.yml
