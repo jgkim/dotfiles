@@ -12,15 +12,39 @@ LOCALHOST_VAR="${DOTFILES_LOCAL}/.ansible/host_vars/localhost"
 ARG1=$1
 ARG2=$2
 
-function bootstrap() {
-  if [ "$ARG1" == '-f' -o "$ARG1" == '--force' -o "$ARG2" == '-f' -o "$ARG2" == '--force' ]; then
-    # Ask for the administrator password upfront.
-    if [ "$(whoami)" != "root" ]; then
-      sudo -v
+function setup() {
+  echo "Installing Python and Ansible via Homebrew."
+  brew install python ansible
+  rm -rf ${DOTFILES_HOME}/.ansible
+  ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
 
-      # Keep-alive: update existing `sudo` time stamp until the script has finished.
-      while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-    fi
+  echo "Configuring the playbook variables."
+  mkdir -p $(dirname ${LOCALHOST_VAR})
+  cat <<EOF > ${LOCALHOST_VAR}
+---
+brew_dir: "${BREW_DIR}"
+bin_dir: "${BREW_DIR}/bin"
+app_dir: "${APP_DIR}"
+dotfiles_remote: "${DOTFILES_REMOTE}"
+dotfiles_local: "${DOTFILES_LOCAL}"
+dotfiles_home: "${DOTFILES_HOME}"
+EOF
+
+  echo "Install the required Ansible roles."
+  cd ${DOTFILES_HOME}/.ansible
+  ansible-galaxy install -f -r requirements.yml -p roles/
+
+  cd ${DOTFILES_LOCAL}
+  echo 'Now you can run the playbook by executing the script: `./update.sh`'
+}
+
+function bootstrap() {
+  # Ask for the administrator password upfront.
+  if [ "$(whoami)" != "root" ]; then
+    sudo -v
+
+    # Keep-alive: update existing `sudo` time stamp until the script has finished.
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
   fi
 
   if [ "$ARG1" != '--no-update' -a "$ARG2" != '--no-update' ]; then
@@ -48,37 +72,15 @@ function bootstrap() {
     sudo mkdir -p ${BREW_DIR}
     sudo chown -R $(id -un) ${BREW_DIR}
     sudo chgrp -R $(id -gn) ${BREW_DIR}
-    curl -L https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 -C ${BREW_DIR}
+    curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ${BREW_DIR}
     export PATH="${BREW_DIR}/bin:$PATH"
   fi
-
-  echo "Installing Python and Ansible via Homebrew."
-  brew install python ansible
-  rm -rf ${DOTFILES_HOME}/.ansible
-  ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
-
-  echo "Configuring the playbook variables."
-  mkdir -p $(dirname ${LOCALHOST_VAR})
-  cat <<EOF > ${LOCALHOST_VAR}
----
-brew_dir: "${BREW_DIR}"
-bin_dir: "${BREW_DIR}/bin"
-app_dir: "${APP_DIR}"
-dotfiles_remote: "${DOTFILES_REMOTE}"
-dotfiles_local: "${DOTFILES_LOCAL}"
-dotfiles_home: "${DOTFILES_HOME}"
-EOF
-
-  echo "Install the required Ansible roles."
-  cd ${DOTFILES_HOME}/.ansible
-  ansible-galaxy install -f -r requirements.yml -p roles/
-
-  cd ${DOTFILES_LOCAL}
-  echo 'Now you can run the playbook by executing the script: `./update.sh`'
+  
+  setup
 }
 
-if [ "$ARG1" == '-f' -o "$ARG1" == '--force' -o "$ARG2" == '-f' -o "$ARG2" == '--force' ]; then
-  bootstrap
+if [ "$ARG1" == '-s' -o "$ARG1" == '--setup' -o "$ARG2" == '-s' -o "$ARG2" == '--setup' ]; then
+  setup
 else
   read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1
   echo
@@ -88,4 +90,4 @@ else
   fi;
 fi;
 
-unset ARG1 ARG2 bootstrap
+unset ARG1 ARG2 bootstrap setup

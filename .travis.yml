@@ -14,11 +14,19 @@ install:
   - cp -r ../dotfiles ~/Workspace/dotfiles
 
 script:
-  # Keep-alive: update existing `sudo` time stamp until the script has finished.
-  - while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-  # Execute the bootstrapping script
   - cd ~/Workspace/dotfiles
-  - ./bootstrap.sh --force --no-update
+  # Install brew
+  - curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall > uninstall
+  - chmod 755 uninstall
+  - ./uninstall --path=$(dirname $(dirname $(which brew))) --force
+  - rm -f uninstall
+  - sudo mkdir -p /opt/homebrew
+  - sudo chown -R $(id -un) /opt/homebrew
+  - sudo chgrp -R $(id -gn) /opt/homebrew
+  - curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C /opt/homebrew
+  - export PATH=/opt/homebrew/bin:$PATH
+  # Execute the bootstrapping script
+  - ./bootstrap.sh --setup
   # Generate package lists for testing
   - echo 'minimap' > atom_packages
   - echo 'node' > brew_packages
@@ -28,9 +36,7 @@ script:
   - echo 'DTerm' > login_items
   - echo 'npm-check-updates' > node_packages
   # Execute the update script
-  - export PATH=/opt/homebrew/bin:$PATH
-  - travis_wait 50 FORCE_UNSAFE_CONFIGURE=1 ./update.sh -e "brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false"
-
+  - travis_wait 50 sudo -s FORCE_UNSAFE_CONFIGURE=1 ./update.sh '--extra-vars=\"brew_upgrade_all=false atom_upgrade_all=false node_upgrade_all=false\"'
 notifications:
   slack:
     secure: pKGt6ONkPG7iiwNopBsmQ4aQ1tzDELUUj4xN+KTBeP1i59b0RdoK/H6uCSysMbjKzI7sqhmoiFrEBu8KtCiGsq+aukughQlQdGYMtsqwvoewPoQ6JKq/tbWp8hFNnz8eluGpdbLWIQUT6SQzgcGn5lr/zZ2L6WRPrSb4qaGIu0MYFR4OjA82xxgNywvzLluD0xsFkMD8c7OZ4lzVsJzHG21LGu4rbGp7KvoTJ2/xBXyRQF1UAHvNgcjXmSMcPT+ty0oVIz6152QJpMZE9mp51ihknDGLUvv1Mh/JsqQR+rpPEzsQHM34AnehI30NapJ0MG2Dr+zVuys7FuBuHJA+Y/uLuTlpUlUQWP1BdnhS6EYIql1f9gAEL2J1fg4BS0aKH1hXUnHU8ZaFyjJXQI1BRgVP//PYmgphaTsJXgtyjSiOaf4+0YL3qIrGaMzuP7Ya1vrSMrBwwFyE2Ya9iXU1eJx/VMN92OfDyu41TVDWcVOiE0CmYdTBBQSYedZhp/DQFpUNbkaqhjSkGAg8RmbxRiCnuZE84LU0O09i+gy6g7Yc6pEjcUTy6Xz+RwxxZlpQeH+0+SbTADpgqvdu1//g+MTnaHP3ZTiB74TApAO7yjyNo8NvAVnvlgfYnIIY97OeTaVLZogOUkFuGiKy9s6/If+93bta4IBMuD82EhVVsQc=
