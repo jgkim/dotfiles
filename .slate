@@ -1,0 +1,22 @@
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+# Move Bindings
+bind up:ctrl;alt;cmd move (screenSizeX-windowSizeX)/2;(screenSizeY-windowSizeY)/2 windowSizeX;windowSizeY
+bind 1:ctrl;alt;cmd  move 10;35 windowSizeX;windowSizeY
+bind 0:ctrl;alt;cmd  move (screenSizeX-1280)/2;(screenSizeY-680)/2 1280;680
+bind -:ctrl;alt;cmd  move (screenSizeX-1600)/2;(screenSizeY-1200)/2 1600;1200
+bind =:ctrl;alt;cmd  move (screenSizeX-1800)/2;(screenSizeY-1300)/2 1800;1300
+
+# Resize Bindings
+bind right:ctrl;alt  resize +10% +0
+bind left:ctrl;alt   resize -10% +0
+bind up:ctrl;alt     resize +0   -10%
+bind down:ctrl;alt   resize +0   +10%
+
+# Push Bindings
+bind right:ctrl;cmd  push right bar-resize:screenSizeX/2
+bind left:ctrl;cmd   push left  bar-resize:screenSizeX/2
+bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
+bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
