@@ -2,31 +2,34 @@
 - hosts: localhost
   connection: local
   vars:
+    no_brew: False
     brew_upgrade_all: True
     atom_upgrade_all: True
     node_upgrade_all: True
-  pre_tasks:
+  tasks:
     - import_tasks: tasks/load_files.yml
     - import_tasks: tasks/fonts.yml
     - import_tasks: tasks/local.yml
-  roles:
-    - {
-        role: jgkim.dotfiles ,
+    - import_role:
+        name: jgkim.dotfiles
+      vars:
         dotfiles_ignore: "{{ dotignore_file.stdout_lines }}"
-      }
-    - {
-        role: jgkim.brew ,
-        brew_taps: "{{ brew_taps_file.stdout_lines }}",
-        brew_packages: "{{ brew_packages_file.stdout_lines }}",
+    - import_role:
+        name: jgkim.brew
+      when: not no_brew
+      vars:
+        brew_taps: "{{ brew_taps_file.stdout_lines }}"
+        brew_packages: "{{ brew_packages_file.stdout_lines }}"
         cask_packages: "{{ cask_packages_file.stdout_lines }}"
-      }
-    - {
-        role: jgkim.atom,
+    - import_role:
+        name: jgkim.atom
+      vars:
         atom_packages: "{{ atom_packages_file.stdout_lines }}"
-      }
-  post_tasks:
     - import_tasks: tasks/login_items.yml
     - import_tasks: tasks/node_packages.yml
     - import_tasks: tasks/docker.yml
+      when: not no_brew
     - import_tasks: tasks/heroku.yml
+      when: not no_brew
     - import_tasks: tasks/travis.yml
+      when: not no_brew
