@@ -5,11 +5,10 @@ cd ~/.ansible
 
 OPTIONS='--inventory=hosts'
 if [ -z "$*" ]; then
-  OPTIONS="${OPTIONS} --ask-become-pass"
+  OPTIONS=(${OPTIONS[@]} "--ask-become-pass")
+else
+  OPTIONS=(${OPTIONS[@]} "$*")
 fi
-
-OPTIONS=($OPTIONS)
-OPTIONS=(${OPTIONS[@]} "$*")
 
 ansible-playbook site.yml "${OPTIONS[@]}"
 
