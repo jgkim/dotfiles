@@ -13,9 +13,6 @@ if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
-export GOPATH="/opt/go"
-export PATH="$GOPATH/bin:$PATH"
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
