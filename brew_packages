@@ -7,7 +7,7 @@ git
 hub
 git-extras
 git-lfs
-git-flow
+git-flow-avh
 node
 nvm
 yarn
