@@ -14,7 +14,7 @@ ARG2=$2
 
 function setup() {
   echo "Installing Python and Ansible via Homebrew."
-  brew install python ansible
+  brew install python@2 ansible
   rm -rf ${DOTFILES_HOME}/.ansible
   ln -s ${DOTFILES_LOCAL}/.ansible ${DOTFILES_HOME}
 
