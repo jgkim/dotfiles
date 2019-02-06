@@ -5,7 +5,7 @@
     state: present
 
 - name: Ensure the ruby environment.
-   shell: eval "$(rbenv init -)"
+  shell: eval "$(rbenv init -)"
 
 - name: Ensure Travis CI CLI is installed.
   gem:
