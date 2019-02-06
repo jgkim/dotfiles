@@ -49,7 +49,7 @@ function bootstrap() {
 
   if [ "$ARG1" != '--no-update' -a "$ARG2" != '--no-update' ]; then
     echo "Updating OS X. If this requires a restart, run the script again."
-    sudo softwareupdate -iva
+    sudo softwareupdate --install --all --verbose
 
     if ! xcode-select -p > /dev/null ; then
       echo "Installing Xcode Command Line Tools."
