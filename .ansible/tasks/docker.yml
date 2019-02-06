@@ -1,20 +1,13 @@
 ---
 - name: Ensure docker-related packages are installed.
   homebrew:
-    name: "{{ item }}"
+    name: ["docker", "docker-machine", "docker-compose"]
     state: present
-  with_items:
-    - docker
-    - docker-machine
-    - docker-compose
 
 - name: Ensure docker-related applications are installed.
   homebrew_cask:
-    name: "{{ item }}"
+    name: ["virtualbox", "kitematic"]
     state: present
-  with_items:
-    - virtualbox
-    - kitematic
   environment:
     HOMEBREW_CASK_OPTS: "--appdir={{ app_dir }} --binarydir={{ brew_dir }}/bin"
 
