@@ -3,7 +3,6 @@ aligner
 aligner-css
 aligner-javascript
 aligner-scss
-atom-react-native-autocomplete
 autocomplete-modules
 busy-signal
 color-picker
@@ -33,7 +32,6 @@ minimap
 monokai
 node-debugger
 platformio-ide-terminal
-revealjs-preview
 rst-preview-pandoc
 set-syntax
 sort-lines
