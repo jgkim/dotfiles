@@ -1,7 +1,7 @@
 ---
 - name: Ensure ruby is installed.
   homebrew:
-    name: ["ruby", "rbenv"]
+    name: ruby
     state: present
 
 - name: Ensure Travis CI CLI is installed.
