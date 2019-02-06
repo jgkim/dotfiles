@@ -1,8 +1,11 @@
 ---
 - name: Ensure ruby is installed.
   homebrew:
-    name: ruby
+    name: ["ruby", "rbenv"]
     state: present
+
+- name: Ensure the ruby environment.
+   shell: eval "$(rbenv init -)"
 
 - name: Ensure Travis CI CLI is installed.
   gem:
