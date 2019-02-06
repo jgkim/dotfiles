@@ -4,11 +4,10 @@
     name: ["ruby", "rbenv"]
     state: present
 
-- name: Ensure the ruby environment.
-   shell: eval "$(rbenv init -)"
-
 - name: Ensure Travis CI CLI is installed.
   gem:
     name: travis
     state: latest
     user_install: no
+  environment:
+    PATH: "{{ brew_dir }}/opt/ruby/bin:{{ ansible_env.PATH }}"
