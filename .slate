@@ -5,9 +5,9 @@ config resizePercentOf screenSize
 # Move Bindings
 bind up:ctrl;alt;cmd move (screenSizeX-windowSizeX)/2;(screenSizeY-windowSizeY)/2 windowSizeX;windowSizeY
 bind 1:ctrl;alt;cmd  move 10;35 windowSizeX;windowSizeY
-bind 0:ctrl;alt;cmd  move (screenSizeX-1280)/2;(screenSizeY-680)/2 1280;680
-bind -:ctrl;alt;cmd  move (screenSizeX-1600)/2;(screenSizeY-1200)/2 1600;1200
-bind =:ctrl;alt;cmd  move (screenSizeX-1800)/2;(screenSizeY-1300)/2 1800;1300
+bind 0:ctrl;alt;cmd  move (screenSizeX-1366)/2;(screenSizeY-768)/2 1366;768
+bind -:ctrl;alt;cmd  move (screenSizeX-1680)/2;(screenSizeY-1050)/2 1680;1050
+bind =:ctrl;alt;cmd  move (screenSizeX-1920)/2;(screenSizeY-1200)/2 1920;1200
 
 # Resize Bindings
 bind right:ctrl;alt  resize +10% +0
