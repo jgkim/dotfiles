@@ -9,7 +9,7 @@
     name: ["virtualbox", "kitematic"]
     state: present
   environment:
-    HOMEBREW_CASK_OPTS: "--appdir={{ app_dir }} --binarydir={{ brew_dir }}/bin"
+    HOMEBREW_CASK_OPTS: "--appdir={{ app_dir }}"
 
 - name: Ensure `/usr/local/bin` exists.
   file:
