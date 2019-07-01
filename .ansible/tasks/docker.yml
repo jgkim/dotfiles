@@ -6,7 +6,7 @@
 
 - name: Ensure docker-related applications are installed.
   homebrew_cask:
-    name: ["virtualbox", "kitematic"]
+    name: ["virtualbox", "virtualbox-extension-pack", "kitematic"]
     state: present
   environment:
     HOMEBREW_CASK_OPTS: "--appdir={{ app_dir }}"
