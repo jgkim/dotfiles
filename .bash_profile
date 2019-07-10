@@ -1,6 +1,6 @@
 export PATH="/opt/homebrew/bin:/opt/homebrew/opt/ruby/bin:$PATH"
 export MANPATH="/opt/homebrew/share/man:$MANPATH"
-export EDITOR="atom"
+export EDITOR="code"
 export NVM_DIR=~/.nvm
 export ANDROID_HOME=`brew --prefix`/opt/android-sdk
 export VIRTUALENVWRAPPER_PYTHON=`brew --prefix`/bin/python2
